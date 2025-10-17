@@ -68,7 +68,7 @@ public class App {
             System.out.println("Belum ada stok obat yang ditambahkan");
         } else {
 
-            Collections.sort(daftarObat, (obat1, obat2) -> Integer.compare(obat2.getId(), obat1.getId()));
+            Collections.sort(daftarObat, (obat1, obat2) -> Integer.compare(obat1.getId(), obat2.getId()));
             System.out.println("***********");
             System.out.println("DAFTAR OBAT");
             System.out.println("***********");

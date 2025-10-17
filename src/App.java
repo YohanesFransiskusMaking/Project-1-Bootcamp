@@ -84,19 +84,14 @@ public class App {
         if (daftarObat.isEmpty()) {
             System.out.println("Belum ada daftar obat");
         } else {
-            try {
-                System.out.print("Input Id Obat: ");
-                int cari = scanner.nextInt();
-                Optional<Obat> dapatObat = daftarObat.stream().filter(a -> a.getId() == cari).findFirst();
-                if (dapatObat.isPresent()) {
-                    System.out.printf("Detail obat dengan Id %d\n", cari);
-                    System.out.println(dapatObat.get());
-                } else {
-                    System.out.println("Data tidak ditemukan");
-                }
-
-            } catch (Exception e) {
-                System.out.println("Terjadi kesalahan inputan");
+            System.out.print("Input Id Obat: ");
+            int cari = scanner.nextInt();
+            Optional<Obat> dapatObat = daftarObat.stream().filter(a -> a.getId() == cari).findFirst();
+            if (dapatObat.isPresent()) {
+                System.out.printf("Detail obat dengan Id %d\n", cari);
+                System.out.println(dapatObat.get());
+            } else {
+                System.out.println("Data tidak ditemukan");
             }
 
         }
@@ -129,45 +124,45 @@ public class App {
 
     }
 
-    public static void updateObat(Scanner scanner){
+    public static void updateObat(Scanner scanner) {
         System.out.print("Masukan Id obat yang akan di perbaharui:");
         int input = scanner.nextInt();
         scanner.nextLine();
 
-        Optional<Obat> updateObat = daftarObat.stream().filter(o ->o.getId()==input).findFirst();
+        Optional<Obat> updateObat = daftarObat.stream().filter(o -> o.getId() == input).findFirst();
         System.out.println("Perbaharui data obat: ");
-        if(updateObat.isPresent()) {
+        if (updateObat.isPresent()) {
             Obat obat = updateObat.get();
             System.out.println("Data lama obat:");
             System.out.println(obat);
             System.out.println("Masukan data baru (kosongkan jika tidak ingin di ubah)");
-            System.out.print("Nama ["+ obat.getNama()+"] : ");
+            System.out.print("Nama [" + obat.getNama() + "] : ");
             String namaBaru = scanner.nextLine();
             if (!namaBaru.isEmpty()) {
                 obat.setNama(namaBaru);
             }
-            System.out.print("Tipe ["+obat.getType()+"] : ");
+            System.out.print("Tipe [" + obat.getType() + "] : ");
             String typeBaru = scanner.nextLine();
-            if(!typeBaru.isEmpty()){
+            if (!typeBaru.isEmpty()) {
                 obat.setType(typeBaru);
             }
-            System.out.print("Harga ["+obat.getHarga()+"] : ");
+            System.out.print("Harga [" + obat.getHarga() + "] : ");
             String hargaInput = scanner.nextLine();
-           if (!hargaInput.isEmpty()) {
-            try{
-                double hargaBaru = Double.parseDouble(hargaInput);
-                obat.setHarga(hargaBaru);
+            if (!hargaInput.isEmpty()) {
+                try {
+                    double hargaBaru = Double.parseDouble(hargaInput);
+                    obat.setHarga(hargaBaru);
 
-            }catch(NumberFormatException e){
-                System.out.println("Format harga tidak valid. Harga tidak di ubah.");
+                } catch (NumberFormatException e) {
+                    System.out.println("Format harga tidak valid. Harga tidak di ubah.");
+                }
             }
-           }
 
-           System.out.println("Data berhasil di perbaharui");
-           System.out.println(obat);
+            System.out.println("Data berhasil di perbaharui");
+            System.out.println(obat);
 
-        }else{
-            System.out.println("Input tidak ditemukan");
+        } else {
+            System.out.printf("Data dengan Id %d tidak ditemukan\n", input);
         }
 
     }
